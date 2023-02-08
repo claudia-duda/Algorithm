@@ -29,7 +29,23 @@ def bubble_sort(list):
         for actual_member_index in range(length_list - 1):
             if list[actual_member_index] > list[actual_member_index + 1]: #if the element is bigger than your next one
                 list[actual_member_index], list[actual_member_index + 1] = list[actual_member_index + 1], list[actual_member_index] #change their position
-                print(list)
-        print(list)
+
     print(list)
             
+#Insertion sort
+"""We should compare the second element disorgonized to the the group organized, starting from the last one"""
+def insertion_sort(list):
+    length_list = len(list)
+    for member_index in range(1,length_list): #we start with the second value because we considered the first one an organized group
+        pointer_index = member_index - 1 #declare a before position of the organized group
+        key = list[member_index] #save the actual position to organize
+        
+        while pointer_index >= 0 and list[pointer_index] > key: #while the pointer isn't the first and their value is bigger than key
+            list[pointer_index + 1]= list[pointer_index] #the next value from the pointer receive the pointer value
+            pointer_index -= 1 #the pointer draw back to the penult values
+        
+        list[pointer_index + 1] = key #put the key in the right place,one position before pointer receive the key considering it is bigger
+    print(list)
+
+list = [9,4,2,8,6,1,3,5]
+insertion_sort(list)
