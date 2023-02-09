@@ -47,5 +47,37 @@ def insertion_sort(list):
         list[pointer_index + 1] = key #put the key in the right place,one position before pointer receive the key considering it is bigger
     print(list)
 
+#Merge sort
+"""We compare each value after separate individually by the midle in mini lists, after separate we get the list previous and organize it"""
+def merge_sort(list,start=0,end=None):#responsable to separate each element 
+    
+    if end is None:
+        end = len(list)
+
+    if(end - start > 1): #define if the value is separated in an unique way
+        midle = (end + start)//2 #integer division
+        merge_sort(list, start, midle) #get the first part of the list
+        merge_sort(list, midle, end)#get the second part of the list
+        merge(list, start, midle, end)
+
+def merge(list, start, midle, end):# ordenate and join the list
+    left_list = list[start:midle] #left elements
+    right_list= list[midle:end] #right elements
+    top_right,top_left= 0, 0 #value of top of each list
+    for index in range(start, end):#pass through the list
+        if top_left >= len(left_list):#if  the top index is bigger or the same value from the list length
+            list[index] = right_list[top_right] #put the right value in that position
+            top_right = top_right + 1#the top index proceed ot the next one
+        elif top_right >= len(right_list):#if the right index is bigger or the same value from the list length
+            list[index] = left_list[top_left]
+            top_left = top_left + 1#the top index proceed ot the next one
+        elif left_list[top_left] < right_list[top_right]: #if the top in the list left is minor than right list
+            list[index] = left_list[top_left]#the turn value receive the left top value
+            top_left = top_left + 1 # the top index proceed to the next value
+        else: #the right list is minor
+            list[index] = right_list[top_right] #the turn value receive the right top value
+            top_right = top_right + 1 #the top index proceed ot the next one
+            
 list = [9,4,2,8,6,1,3,5]
-insertion_sort(list)
+merge_sort(list)
+print(list)
