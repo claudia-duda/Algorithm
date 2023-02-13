@@ -78,6 +78,27 @@ def merge(list, start, midle, end):# ordenate and join the list
             list[index] = right_list[top_right] #the turn value receive the right top value
             top_right = top_right + 1 #the top index proceed ot the next one
             
+
+
+#Quicksort
+"""We separate the minor value of pivot in a list, passing trough that list again to organize"""
+def quicksort(list, start=0, end=None):#responsable to do the recursion to pass on partition 
+    if end is None: # If it is the first execution
+        end = len(list) - 1 #define the end index, removing the last on considering the pivot
+    if start < end: #if there is more than one element
+        pivot = partition(list,start,end) #separate the values in partitions
+        quicksort(list, start, pivot - 1) #left sublist 
+        quicksort(list, pivot + 1, end) #right sublist
+
+def partition(list,start,end): 
+    pivot = list[end] #always being the last element
+    minor_values_index = start #always start being in the first position
+    for bigger_value_index in range(start, end): #The loop to pass for each element 
+        if list[bigger_value_index] <= pivot: #compare the pivot to each position
+            list[bigger_value_index], list[minor_values_index] = list[minor_values_index], list[bigger_value_index] #turn their positions
+            minor_values_index = minor_values_index + 1 #proceed according to the progression of minor quantity values
+    list[minor_values_index], list[end] = list[end], list[minor_values_index] #turn their values
+    return minor_values_index
 list = [9,4,2,8,6,1,3,5]
-merge_sort(list)
+quicksort(list)
 print(list)
